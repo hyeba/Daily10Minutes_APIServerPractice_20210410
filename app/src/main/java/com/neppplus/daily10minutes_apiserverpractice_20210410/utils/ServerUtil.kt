@@ -7,6 +7,13 @@ import java.io.IOException
 
 class ServerUtil {
 
+//    화면(액티비티)의 입장에서, 서버에 다녀오면 할 행동을 적는 가이드북.
+//    행동 지침을 기록하는 개념: Interface
+
+    interface JsonResponseHandler {
+        fun onResponse(jsonObj : JSONObject)
+    }
+
     companion object {
 
 //        이 중괄호 안에 적히는 변수 / 함수는
@@ -17,8 +24,9 @@ class ServerUtil {
         val HOST_URL = "http://15.164.153.174"
 
 //        서버에 로그인을 요청하는 기능 => 함수로 만들고 사용하자
+//        필요 재료: 이메일, 비번 + 로그인 결과에 대한 처리 방안(가이드북)
 
-        fun postRequestLogin(email : String, pw : String) {
+        fun postRequestLogin(email : String, pw : String, handler : JsonResponseHandler) {
 
 //            어느 주소로 가야하나? 호스트 주소/ 기능 주소
 //            ex) 로그인 => http://15.164.153.174/user HOST/user => 최종 주소 완성
@@ -70,6 +78,13 @@ class ServerUtil {
                     val jsonObj = JSONObject(bodyString)
 
                     Log.d("서버 응답", jsonObj.toString())
+
+//                    받아낸 서버 응답 내용은 => 여기(ServerUtil)서 활용하는게 아니라
+//                    화면에서 UI에 반영하기 위한 재료로 사용
+//                    ex. code : 400 => 로그인 실패 토스트 (메인)
+
+//                    완성한 jsonObj 변수를 => 액티비티에 넘겨주자 => 파싱 등등 처리는 액티비티에서 작성
+                    handler?.onResponse(jsonObj)
 
                 }
 
