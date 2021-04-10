@@ -11,7 +11,7 @@ class ServerUtil {
 //    행동 지침을 기록하는 개념: Interface
 
     interface JsonResponseHandler {
-        fun onResponse(jsonObj : JSONObject)
+        fun onResponse(jsonObj: JSONObject)
     }
 
     companion object {
@@ -20,53 +20,17 @@ class ServerUtil {
 //        ServerUtil.변수 or 함수() 등으로 클래스 자체의 기능으로 활용 가능
 //        JAVA: static 개념에 대응됨
 
-//        서버의 호스트 주소 저장
+        //        서버의 호스트 주소 저장
         val HOST_URL = "http://15.164.153.174"
 
 //        서버에 로그인을 요청하는 기능 => 함수로 만들고 사용하자
 //        필요 재료: 이메일, 비번 + 로그인 결과에 대한 처리 방안(가이드북)
 
-        fun postRequestLogin(email : String, pw : String, handler : JsonResponseHandler) {
+        fun postRequestLogin(email: String, pw: String, handler: JsonResponseHandler) {
 
 //            어느 주소로 가야하나? 호스트 주소/ 기능 주소
 //            ex) 로그인 => http://15.164.153.174/user HOST/user => 최종 주소 완성
 
-//            회원가입 기능
-
-            fun putRequestSignUp(email: String, pw: String, nickname : String, handler: JsonResponseHandler){
-
-                val urlString = "${HOST_URL}/user"
-                val formData = FormBody.Builder()
-                    .add("email", email)
-                    .add("password", pw)
-                    .add("nick_name", nickname)
-                    .build()
-
-                val request = Request.Builder()
-                    .url(urlString)
-                    .put(formData)
-                    .build()
-
-                val client = OkHttpClient()
-
-                client.newCall(request).enqueue(object :Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-
-                    }
-
-                    override fun onResponse(call: Call, response: Response) {
-                        val bodyString = response.body!!.string()
-                        val jsonObj = JSONObject(bodyString)
-                        Log.d("서버응답", jsonObj.toString())
-                        handler?.onResponse(jsonObj)
-
-                    }
-
-
-                })
-
-
-            }
 
             val urlString = "${HOST_URL}/user"
 
@@ -130,6 +94,47 @@ class ServerUtil {
 
         }
 
+//            회원가입 기능
+
+        fun putRequestSignup(
+            email: String,
+            pw: String,
+            nickname: String,
+            handler: JsonResponseHandler
+        ) {
+
+            val urlString = "${HOST_URL}/user"
+            val formData = FormBody.Builder()
+                .add("email", email)
+                .add("password", pw)
+                .add("nick_name", nickname)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .put(formData)
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버응답", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+
+                }
+
+
+            })
+
+
+        }
 
 
     }
