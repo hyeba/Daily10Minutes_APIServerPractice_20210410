@@ -1,21 +1,32 @@
 package com.neppplus.daily10minutes_apiserverpractice_20210410
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.neppplus.daily10minutes_apiserverpractice_20210410.utils.ServerUtil
-import kotlinx.android.synthetic.main.activity_Login.*
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.emailEdt
+import kotlinx.android.synthetic.main.activity_login.passwordEdt
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.json.JSONObject
 
 class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_Login)
+        setContentView(R.layout.activity_login)
         setupEvents()
         setValues()
     }
 
     override fun setupEvents() {
+
+        signupBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+
+        }
 
         loginBtn.setOnClickListener {
 
