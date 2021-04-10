@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.neppplus.daily10minutes_apiserverpractice_20210410.utils.ContextUtil
 import com.neppplus.daily10minutes_apiserverpractice_20210410.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
@@ -26,7 +27,9 @@ class LoginActivity : BaseActivity() {
 
         autoLoginCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
 
-            Log.d("자동로그인체크여부", isChecked.toString())
+//            ContextUtil을 이용해서, 변경된 체크값 저장
+
+            ContextUtil.setAutoLogin(mContext, isChecked)
 
         }
 
@@ -100,6 +103,9 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+//        ContextUtil에 저장해둔 자동로그인 여부를 꺼내서 => 체크박스에 반영
+        autoLoginCheckBox.isChecked = ContextUtil.getAutoLogin(mContext)
 
     }
 
