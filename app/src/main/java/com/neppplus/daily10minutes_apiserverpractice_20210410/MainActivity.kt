@@ -25,6 +25,8 @@ class MainActivity : BaseActivity() {
 
 //            서버에 로그인 요청 (배울 내용)
 
+            ServerUtil.postRequestLogin(inputEmail, inputPassword)
+
 
         }
 
