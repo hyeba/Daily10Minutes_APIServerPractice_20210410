@@ -20,6 +20,7 @@ class LoginActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+
 //        체크박스의 "체크여부가 변화되면"
 //        SharedPreferences에 어떻게 변화되었는지 (체크 / 해제) 저장 예제.
 
