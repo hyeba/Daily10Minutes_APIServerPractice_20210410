@@ -10,14 +10,15 @@ class Project(
     var imageUrl : String,
     var description : String,
     var onGoingUserCount : Int,
-    var proofMethod : String) : Serializable {
+    var proofMethod : String,
+    var myLastStatus : String?) : Serializable {
 
 //    태그 목록을 저장하기 위한 ArrayList => 멤버변수 추가
     val tags = ArrayList<String>()
 
 //    보조 생성자 추가 => Project() 만으로도 만들 수 있게
 
-    constructor() : this(0, "", "", "", 0, "")
+    constructor() : this(0, "", "", "", 0, "", null)
 
 //    기능 추가 => JSON 넣으면(input) : Project로 변환 (return) => 단순 기능. companion onject 이용
 
@@ -35,6 +36,16 @@ class Project(
 
             project.onGoingUserCount = jsonObj.getInt("ongoing_users_count")
             project.proofMethod = jsonObj.getString("proof_method")
+
+//            내 최종 도전 상태 => null일 가능성도 있다.
+//            null인 데이터를 파싱하려고 하면 => 에러처리. 파싱 중단
+//            null 인지 아닌지 확인? => null이 아닐 때만 파싱하자
+
+            if (!jsonObj.isNull("my_last_status")) {
+
+                project.myLastStatus = jsonObj.getString("my_last_status")
+
+            }
 
 //            태그목록 (JSONArray [ ] ) => tags에 String으로 추가
 
