@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.neppplus.daily10minutes_apiserverpractice_20210410.R
 import com.neppplus.daily10minutes_apiserverpractice_20210410.datas.Project
 
@@ -34,6 +35,7 @@ class ProjectAdapter(
 
         projectTitleTxt.text = data.title
 
+        Glide.with(mContext).load(data.imageUrl).into(projectBackgroundImg)
 
 
 
