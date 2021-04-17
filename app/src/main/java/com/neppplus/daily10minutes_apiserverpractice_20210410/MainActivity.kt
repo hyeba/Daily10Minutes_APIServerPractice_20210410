@@ -1,7 +1,9 @@
 package com.neppplus.daily10minutes_apiserverpractice_20210410
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.neppplus.daily10minutes_apiserverpractice_20210410.adapters.ProjectAdapter
 import com.neppplus.daily10minutes_apiserverpractice_20210410.datas.Project
 import com.neppplus.daily10minutes_apiserverpractice_20210410.utils.ServerUtil
@@ -21,6 +23,19 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        logoutBtn.setOnClickListener {
+
+//            정말 로그아웃? => AlertDiaLog
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("로그아웃")
+            alert.setMessage("정말 로그아웃 하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
+        }
 
     }
 
