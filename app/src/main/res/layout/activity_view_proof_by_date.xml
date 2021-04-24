@@ -46,7 +46,7 @@
         android:layout_height="match_parent">
 
         <ListView
-            android:id="@+id/proofListView1"
+            android:id="@+id/proofListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
