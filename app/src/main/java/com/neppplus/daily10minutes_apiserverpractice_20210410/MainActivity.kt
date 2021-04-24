@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.neppplus.daily10minutes_apiserverpractice_20210410.adapters.ProjectAdapter
 import com.neppplus.daily10minutes_apiserverpractice_20210410.datas.Project
@@ -69,6 +70,9 @@ class MainActivity : BaseActivity() {
 
         mProjectAdapter = ProjectAdapter(mContext, R.layout.project_list_item, mProjects)
         projectListView.adapter = mProjectAdapter
+
+//        BaseActivity가 물려주는 backImg를 메인화면에서만 숨김처리
+        backimg.visibility = View.GONE
 
     }
 
