@@ -95,6 +95,10 @@ class ViewProofByDateActivity : BaseActivity() {
                 val projectObj = dataObj.getJSONObject("project")
                 val proofsArr = projectObj.getJSONArray("proofs")
 
+//                기존에 담겨있던 게시글은 전부 삭제하고 나서 새로 받아온 글들을 추가해주자
+                mProofList.clear()
+
+
                 for (i  in  0 until proofsArr.length()) {
                     val proofObj = proofsArr.getJSONObject(i)
 //                    인증글 JSON -> Proof 객체로 변환 -> mProofList에 추가
